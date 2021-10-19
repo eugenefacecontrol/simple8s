@@ -2,7 +2,7 @@
 # v1: componentStatus, configMap, Endpoints, Event, Namespace, Pod etc.
 # apps/v1: ControllerRevision, StatefulSet
 apiVersion: v1
-# There are several types of created objects: StatefulSet, ReplicaController, Pod - running one container or more, Service - setting up networking
+# There are several types of created objects: StatefulSet, ReplicaController, Pod - running one container or more, Service - setting up networking, Deployment - maintains a set of identical pods, ensuring that they have the correct config and that the right number exists.
 kind: Pod
 metadata:
   name: client-pod
@@ -10,9 +10,12 @@ metadata:
   # That's how client-pod is linked to the client-node-port. The key/value can be anything: key: value
     component: web
 spec:
+  # Can't update containers count
   containers:
+    # Can't update container name
     - name: client
       image: yauhenisheima/multi-client
+      # Can't update container ports
       ports:
       # complex > client > nginx > default.conf > listen 3000
         - containerPort: 3000
