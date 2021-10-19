@@ -1,0 +1,18 @@
+# Specify a scope of objects we can create:
+# v1: componentStatus, configMap, Endpoints, Event, Namespace, Pod etc.
+# apps/v1: ControllerRevision, StatefulSet
+apiVersion: v1
+# There are several types of created objects: StatefulSet, ReplicaController, Pod - running one container or more, Service - setting up networking
+kind: Pod
+metadata:
+  name: client-pod
+  labels:
+  # That's how client-pod is linked to the client-node-port. The key/value can be anything: key: value
+    component: web
+spec:
+  containers:
+    - name: client
+      image: yauhenisheima/multi-client
+      ports:
+      # complex > client > nginx > default.conf > listen 3000
+        - containerPort: 3000
